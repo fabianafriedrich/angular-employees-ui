@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MessageService} from 'primeng';
 import {EmailValidator, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Employee} from '../models/employee';
 import {Router} from '@angular/router';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +13,7 @@ import {Router} from '@angular/router';
   providers: [MessageService]
 
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   formLogin: FormGroup;
   formSignUp: FormGroup;
@@ -68,4 +70,6 @@ export class LoginComponent implements OnInit {
 
   register() {
   }
+
+  ngOnDestroy(){}
 }

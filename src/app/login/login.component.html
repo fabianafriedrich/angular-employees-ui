@@ -19,7 +19,6 @@
 </div>
 
 <p-dialog header="Sign Up" [(visible)]="display"  [style]="{width: '45vw'}" >
-  <!--  <ng-template pTemplate>-->
   <div class="container">
     <form method="post" (ngSubmit)="register()" [formGroup]="formSignUp" (ngSubmit)="onSubmit(formSignUp.value)">
       <div class="form-group">
@@ -113,5 +112,4 @@
       </div>
     </form>
   </div>
-  <!--  </ng-template>-->
 </p-dialog>

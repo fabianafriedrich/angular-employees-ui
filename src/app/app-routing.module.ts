@@ -6,7 +6,7 @@ import {HomepageComponent} from './homepage/homepage.component';
 
 const routes: Routes = [
   { path: 'employee/login', component: LoginComponent },
-  // { path: 'employee/homepage', component: HomepageComponent, canActivate: [AuthGuard] },
+  { path: 'employee/homepage', component: HomepageComponent },
 
   { path: '', redirectTo: 'employee/login', pathMatch: 'full' }
 ];

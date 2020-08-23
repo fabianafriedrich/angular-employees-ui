@@ -1,1 +1,89 @@
-<p>homepage works!</p>
+<p-messages></p-messages>
+<p-table #dt [columns]="cols" [value]="employees" [paginator]="true" [rows]="5" [responsive]="true" >
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Profession</th>
+      <th>City</th>
+      <th>Branch</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-employee >
+    <tr>
+      <td align="center">{{employee.code}}</td>
+      <td align="center">{{employee.name}}</td>
+      <td align="center">{{employee.profession}}</td>
+      <td align="center">{{employee.city}}</td>
+      <td align="center">{{employee.branch}}</td>
+      <td align="center">
+        <p-button class="ui-button" icon="pi pi-trash" (click)="delete(employee.code)" title="Remove" ></p-button>
+        <p-button class="ui-button" icon="pi pi-pencil" (click)="showDialog(employee)"   title="Edit"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>
+
+<p-dialog header="Update Employee Information" [(visible)]="display"  [style]="{width: '45vw'}" >
+  <!--  <ng-template pTemplate>-->
+  <div class="container">
+    <form method="post" (ngSubmit)="update()" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="form-group">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+            <div class="ui-inputgroup">
+              <input formControlName="name" class="ui-inputgroup-addon" type="text" placeholder="Name">
+            </div>
+            <div class="ui-inputgroup">
+              <p-message severity="error" text="Name is required" *ngIf="!form.controls['name'].valid&&form.controls['name'].dirty"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+            <div class="ui-inputgroup">
+              <input formControlName="profession" class="ui-inputgroup-addon" type="text" placeholder="Profession">
+            </div>
+            <div class="ui-inputgroup">
+              <p-message severity="error" text="Profession is required" *ngIf="!form.controls['profession'].valid&&form.controls['profession'].dirty"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+            <div class="ui-inputgroup">
+              <input formControlName="city" class="ui-inputgroup-addon" type="text" placeholder="City">
+            </div>
+            <div class="ui-inputgroup">
+              <p-message severity="error" text="City is required" *ngIf="!form.controls['city'].valid&&form.controls['city'].dirty"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+            <div class="ui-inputgroup">
+              <input formControlName="branch" class="ui-inputgroup-addon" type="text" placeholder="Branch">
+            </div>
+            <div class="ui-inputgroup">
+              <p-message severity="error" text="Branch is required" *ngIf="!form.controls['branch'].valid&&form.controls['branch'].dirty"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12 ">
+        <div class="ui-inputgroup">
+          <button id="update" pButton class="ui-button-success" type="submit" label="Update" [disabled]="!form.valid"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</p-dialog>

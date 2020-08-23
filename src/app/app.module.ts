@@ -11,7 +11,8 @@ import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { MessageModule } from 'primeng';
+import {MessageModule, TableModule} from 'primeng';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import { MessageModule } from 'primeng';
     ButtonModule,
     InputTextModule,
     MessageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
