@@ -4,6 +4,7 @@ import {EmailValidator, FormBuilder, FormControl, FormGroup, Validators} from '@
 import {Employee} from '../models/employee';
 import {Router} from '@angular/router';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import {EmployeeService} from '../service/employee.service';
 
 @AutoUnsubscribe()
 @Component({
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isSubmitted: boolean;
 
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private service: EmployeeService, private formBuilder: FormBuilder,
               private router: Router, private messageService: MessageService) { }
   display = false;
 
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   formConfigSignUp() {
     this.formSignUp = this.formBuilder.group({
       name: [null, Validators.required],
-      emailSignUp: [null, Validators.required, Validators.email],
+      emailSignUp: [null, Validators.required],
       psw: [null, Validators.required],
       confirmPsw: [null, Validators.required],
       profession: [null, Validators.required],
@@ -68,7 +69,41 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isSubmitted = true;
   }
 
-  register() {
+  signUp(){
+    if (this.formSignUp.valid){
+      if (this.valuesSignUp.psw.value === this.valuesSignUp.confirmPsw.value){
+        this.employee.name = this.valuesSignUp.name.value;
+        this.employee.email = this.valuesSignUp.emailSignUp.value;
+        this.employee.password = this.valuesSignUp.psw.value;
+        this.employee.profession = this.valuesSignUp.profession.value;
+        this.employee.city = this.valuesSignUp.city.value;
+        this.employee.branch = this.valuesSignUp.branch.value;
+        this.service.signUp(this.employee).subscribe(result => {
+            this.formSignUp.reset();
+            this.display = false;
+            this.messageService.add({
+              severity: 'info',
+              summary: 'Success',
+              detail: 'Success Sign Up, Login now',
+            });
+          },
+          error => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Email already exists',
+              detail: 'Cannot register because the email already exists',
+            });
+            return false;
+          });
+      }else {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Passwords do not match',
+          detail: 'Register is invalid',
+        });
+      }
+    }
+
   }
 
   ngOnDestroy(){}

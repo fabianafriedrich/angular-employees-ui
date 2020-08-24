@@ -4,6 +4,7 @@ import {MessageService} from 'primeng';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Employee} from '../models/employee';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { Router } from '@angular/router';
 
 
 @AutoUnsubscribe()
@@ -17,7 +18,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 export class HomepageComponent implements OnInit, OnDestroy {
 
   constructor(private service: EmployeeService, private formBuilder: FormBuilder,
-              private messageService: MessageService) {
+              private messageService: MessageService, private router: Router) {
   }
 
   employees: Employee[];
@@ -59,11 +60,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
   showDialog(employee) {
     this.display = true;
     this.form = this.formBuilder.group({
+      code: [employee.code],
       name: [employee.name, Validators.required],
       profession: [employee.profession, Validators.required],
       city: [employee.city, Validators.required],
       branch: [employee.branch, Validators.required],
     });
+    this.employee = employee;
   }
 
   /*Get all the values from the sign up form*/
@@ -89,7 +92,39 @@ export class HomepageComponent implements OnInit, OnDestroy {
       this.listAll();
     });
   }
-  update(){}
+
+  update(employee){
+    if (this.form.valid) {
+      employee.code = this.employee.code,
+      employee.name = this.values.name.value;
+      employee.profession = this.values.profession.value;
+      employee.city = this.values.city.value;
+      employee.branch = this.values.branch.value;
+      this.service.update(this.employee).subscribe(result => {
+          this.form.reset();
+          this.display = false;
+          this.listAll();
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Success',
+            detail: 'Success Updating Employee',
+          });
+        },
+        error => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Invalid Inputs',
+            detail: 'Information is invalid',
+          });
+          return false;
+        });
+    }
+  }
+  /*Logout of the system*/
+  logout(){
+    // this.service.logOut();
+    this.router.navigate(['employee/login']);
+  }
 
   ngOnDestroy(){
 

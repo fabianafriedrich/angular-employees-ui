@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <div>
   <h2>Login</h2>
   <div class="p-field p-grid">
@@ -20,7 +22,7 @@
 
 <p-dialog header="Sign Up" [(visible)]="display"  [style]="{width: '45vw'}" >
   <div class="container">
-    <form method="post" (ngSubmit)="register()" [formGroup]="formSignUp" (ngSubmit)="onSubmit(formSignUp.value)">
+    <form method="post" (ngSubmit)="signUp()" [formGroup]="formSignUp" (ngSubmit)="onSubmit(formSignUp.value)">
       <div class="form-group">
         <div class="ui-g ui-fluid">
           <div class="ui-g-12">

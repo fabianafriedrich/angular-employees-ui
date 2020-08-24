@@ -1,4 +1,23 @@
-<p-messages></p-messages>
+<p-toast></p-toast>
+<header>
+  <div class="topnav">
+    <div class="p-grid">
+      <div class="p-col">
+        <div class="box">
+          <h3>Hitech Health Employee Application</h3>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box">
+          <div class="topnav-right">
+            <a (click)="logout()">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
 <p-table #dt [columns]="cols" [value]="employees" [paginator]="true" [rows]="5" [responsive]="true" >
   <ng-template pTemplate="header" let-columns>
     <tr>
@@ -30,7 +49,7 @@
 <p-dialog header="Update Employee Information" [(visible)]="display"  [style]="{width: '45vw'}" >
   <!--  <ng-template pTemplate>-->
   <div class="container">
-    <form method="post" (ngSubmit)="update()" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <form method="post" (ngSubmit)="update(employee)" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <div class="form-group">
         <div class="ui-g ui-fluid">
           <div class="ui-g-12">
