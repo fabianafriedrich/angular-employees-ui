@@ -11,7 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import {MessageModule, TableModule, ToastModule} from 'primeng';
+import {DropdownModule, MessageModule, TableModule, ToastModule} from 'primeng';
 import {HttpClientModule} from '@angular/common/http';
 
 
@@ -21,21 +21,22 @@ import {HttpClientModule} from '@angular/common/http';
     LoginComponent,
     HomepageComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    DialogModule,
-    MessagesModule,
-    FormsModule,
-    ButtonModule,
-    InputTextModule,
-    MessageModule,
-    ReactiveFormsModule,
-    TableModule,
-    HttpClientModule,
-    ToastModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        DialogModule,
+        MessagesModule,
+        FormsModule,
+        ButtonModule,
+        InputTextModule,
+        MessageModule,
+        ReactiveFormsModule,
+        TableModule,
+        HttpClientModule,
+        ToastModule,
+        DropdownModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

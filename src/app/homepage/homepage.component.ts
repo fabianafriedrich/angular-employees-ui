@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EmployeeService} from '../service/employee.service';
-import {MessageService} from 'primeng';
+import {MessageService, SelectItem} from 'primeng';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Employee} from '../models/employee';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Router } from '@angular/router';
+import {Role} from '../models/role';
 
 
 @AutoUnsubscribe()
@@ -25,10 +26,10 @@ export class HomepageComponent implements OnInit, OnDestroy {
   employee = new Employee();
   cols: any[];
   display: boolean;
-  selectedEmployee: Employee;
   form: FormGroup;
   isSubmitted: boolean;
   isAdmin: boolean;
+  roles: SelectItem[];
 
 
   ngOnInit(): void {
@@ -41,6 +42,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
       {field: 'Profession'},
       {field: 'City'},
       {field: 'Branch'}
+    ];
+
+    this.roles = [
+      {label: 'Admin', value: 'ADMIN'},
+      {label: 'User', value: 'USER'}
     ];
 
   }
@@ -56,11 +62,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
       profession: [null, Validators.required],
       city: [null, Validators.required],
       branch: [null, Validators.required],
+      role: [null, Validators.required]
     });
   }
 
   showDelete(){
-    debugger;
     this.isAdmin = this.service.isAdmin();
     console.log(this.service.isAdmin());
   }
@@ -73,6 +79,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
       profession: [employee.profession, Validators.required],
       city: [employee.city, Validators.required],
       branch: [employee.branch, Validators.required],
+      role: [employee.role]
     });
     this.employee = employee;
   }
@@ -103,11 +110,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   update(employee){
     if (this.form.valid) {
-      employee.code = this.employee.code,
+      employee.code = this.employee.code;
       employee.name = this.values.name.value;
       employee.profession = this.values.profession.value;
       employee.city = this.values.city.value;
       employee.branch = this.values.branch.value;
+      employee.role = this.values.role.value;
       this.service.update(this.employee).subscribe(result => {
           this.form.reset();
           this.display = false;

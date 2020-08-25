@@ -1,23 +1,13 @@
 <p-toast></p-toast>
-<header>
-  <div class="topnav">
-    <div class="p-grid">
-      <div class="p-col">
-        <div class="box">
-          <h3>Hitech Health Employee Application</h3>
-        </div>
-      </div>
-      <div class="p-col">
-        <div class="box">
-          <div class="topnav-right">
-            <a (click)="logout()">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
+<nav>
+  <div class="logo">
+    <h4>Hitech Health Employee Application</h4>
   </div>
+  <li class="nav-link">
+    <a (click)="logout()">Logout</a>
+  </li>
+</nav>
 
-</header>
 <p-table #dt [columns]="cols" [value]="employees" [paginator]="true" [rows]="5" [responsive]="true" >
   <ng-template pTemplate="header" let-columns>
     <tr>
@@ -46,8 +36,7 @@
 
 </p-table>
 
-<p-dialog header="Update Employee Information" [(visible)]="display"  [style]="{width: '45vw'}" >
-  <!--  <ng-template pTemplate>-->
+<p-dialog header="Update Employee Information" [(visible)]="display"  [style]="{width: '45vw'}" styleClass="mydialog" >
   <div class="container">
     <form method="post" (ngSubmit)="update(employee)" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <div class="form-group">
@@ -95,6 +84,13 @@
             <div class="ui-inputgroup">
               <p-message severity="error" text="Branch is required" *ngIf="!form.controls['branch'].valid&&form.controls['branch'].dirty"></p-message>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+            <p-dropdown formControlName="role" *ngIf="isAdmin" [options]="roles" placeholder="Employee Role" [showClear]="true"></p-dropdown>
           </div>
         </div>
       </div>

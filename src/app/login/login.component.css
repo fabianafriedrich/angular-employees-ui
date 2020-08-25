@@ -1,1 +1,81 @@
+body{
+  margin: 0;
+  padding: 0;
+  background: #171351;
+  font-family: sans-serif;
+}
+
+::ng-deep body .ui-inputgroup .ui-inputgroup-addon:last-child{
+  background-color: #fdfcfc;
+}
+
+.login{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  min-height: 200px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 40px;
+  box-sizing: border-box;
+
+}
+
+h3{
+  margin: 0;
+  padding: 0 0 20px;
+  color: #262626;
+  text-align: center;
+
+}
+
+.login input{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login input[type="text"],
+.login input[type="password"]{
+  border: none;
+  border-bottom: 2px solid #262626;
+  outline: none;
+  height: 40px;
+  color: #262626;
+  background: transparent;
+  font-size: 16px;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+.login input[type="text"]:focus,
+.login input[type="password"]:focus{
+  border-bottom: 2px solid #f00;
+}
+
+.inputBox{
+  position: relative;
+}
+
+.inputBox span{
+  position: absolute;
+  top: 10px;
+  color: #262626;
+}
+
+.login button{
+  border: none;
+  outline: none;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.signUp{
+  background: #2b8e1a;
+
+}
+
+
 
