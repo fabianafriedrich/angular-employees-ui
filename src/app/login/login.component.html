@@ -2,22 +2,35 @@
 
 <div>
   <h2>Login</h2>
-  <div class="p-field p-grid">
-    <label for="email" class="p-col-fixed" style="width:100px">Email</label>
-    <div class="p-col">
-      <input id="email" type="text" pInputText>
+  <form method="post" (ngSubmit)="login()" [formGroup]="formLogin">
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <p [ngClass]="{ 'has-error': isSubmitted && valuesLogin.email.errors }">
+        <input type="text" id="email" name="email"
+               class="form-control" placeholder="Email"
+               formControlName="email" required/>
+      </p>
+      <div *ngIf="isSubmitted && valuesLogin.email.errors" class="help-block">
+        <div *ngIf="valuesLogin.email.errors.required">Email is required</div>
+      </div>
+
     </div>
-  </div>
-  <div class="p-field p-grid">
-    <label for="password" class="p-col-fixed" style="width:100px">Password</label>
-    <div class="p-col">
-      <input id="password" type="password" pInputText>
+
+    <div class="form-group">
+      <label for="password">Password *</label>
+      <p [ngClass]="{ 'has-error': isSubmitted && valuesLogin.password.errors }">
+        <input type="password" id="password" name="password"
+               class="form-control" placeholder="Password"
+               formControlName="password" required/>
+      </p>
+      <div *ngIf="isSubmitted && valuesLogin.password.errors" class="help-block">
+        <div *ngIf="valuesLogin.password.errors.required">Password is required</div>
+      </div>
     </div>
-  </div>
-  <div class="p-formgroup-inline" align="right">
     <button pButton type="button" (click)="showDialog()" style="margin: 2px" label="Sign Up"></button>
-    <button pButton type="button" style="margin: 2px" label="Login"></button>
-  </div>
+    <button pButton type="button" type="submit"   style="margin: 2px" label="Login"></button>
+<!--    <button type="submit" class="btn btn-primary">Login</button>-->
+  </form>
 </div>
 
 <p-dialog header="Sign Up" [(visible)]="display"  [style]="{width: '45vw'}" >

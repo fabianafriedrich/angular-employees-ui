@@ -106,5 +106,27 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   }
 
+  /*Implementation login functionality and if OK is going to be redirected to the users page*/
+  login() {
+    debugger;
+    if (this.formLogin.valid){
+      this.employee.email = this.valuesLogin.email.value;
+      this.employee.password = this.valuesLogin.password.value;
+      (this.service.login(this.employee).subscribe(
+        data => {
+          this.router.navigate(['employee/homepage']);
+        },
+        error => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Wrong Credentials',
+            detail: 'Login is invalid',
+          });
+          this.formLogin.reset();
+          this.formLogin.controls.username.setErrors({invalid: true});
+        }
+      ));
+    }
+  }
   ngOnDestroy(){}
 }

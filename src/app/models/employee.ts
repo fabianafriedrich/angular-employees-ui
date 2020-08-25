@@ -1,3 +1,5 @@
+import {Role} from './role';
+
 export class Employee {
   code: number;
   name = '';
@@ -6,4 +8,6 @@ export class Employee {
   profession: '';
   city: '';
   branch = '';
+  role: Role;
+
 }

@@ -38,8 +38,8 @@
       <td align="center">{{employee.city}}</td>
       <td align="center">{{employee.branch}}</td>
       <td align="center">
-        <p-button class="ui-button" icon="pi pi-trash" (click)="delete(employee.code)" title="Remove" ></p-button>
-        <p-button class="ui-button" icon="pi pi-pencil" (click)="showDialog(employee)"   title="Edit"></p-button>
+        <p-button class="ui-button" icon="pi pi-trash" *ngIf="isAdmin" (click)="delete(employee.code)" title="Remove" ></p-button>
+        <p-button class="ui-button" icon="pi pi-pencil"  (click)="showDialog(employee)"   title="Edit"></p-button>
       </td>
     </tr>
   </ng-template>

@@ -28,9 +28,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
   selectedEmployee: Employee;
   form: FormGroup;
   isSubmitted: boolean;
+  isAdmin: boolean;
 
 
   ngOnInit(): void {
+    this.showDelete();
     this.formConfig();
     this.listAll();
     this.cols = [
@@ -55,6 +57,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
       city: [null, Validators.required],
       branch: [null, Validators.required],
     });
+  }
+
+  showDelete(){
+    debugger;
+    this.isAdmin = this.service.isAdmin();
+    console.log(this.service.isAdmin());
   }
 
   showDialog(employee) {
@@ -86,9 +94,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
       );
   }
 
-  /*Delete user by id*/
-  delete(id) {
-    this.service.delete(id).subscribe(() => {
+  /*Delete employee by code*/
+  delete(code) {
+    this.service.delete(code).subscribe(() => {
       this.listAll();
     });
   }
@@ -122,7 +130,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
   /*Logout of the system*/
   logout(){
-    // this.service.logOut();
+    this.service.logOut();
     this.router.navigate(['employee/login']);
   }
 
