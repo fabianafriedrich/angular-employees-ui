@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://hitech-health-employees-api.herokuapp.com'
-  // apiUrl: 'http://localhost:8080'
+  // apiUrl: 'https://hitech-health-employees-api.herokuapp.com'
+  apiUrl: 'http://localhost:8080'
 
 };
 

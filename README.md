@@ -1,6 +1,6 @@
 ## EmployeesUi
 
-The full project demo deployed on Heroku can be found at: https://employee-ui.heroku.com
+The full project demo deployed on Heroku can be found at: https://hitech-health-employees-ui.herokuapp.com
 
 ## Cloning Projects
 
