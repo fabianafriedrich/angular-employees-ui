@@ -30,9 +30,12 @@ export class EmployeeService {
       })
     };
   }
+
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
+
+  /*check if the employee loged is ADMIN or not*/
   isAdmin(){
     const employee = JSON.parse(localStorage.getItem('currentUser'));
     if (employee.role === Role.ADMIN){
